@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mister_app/widgets/login/login_button.dart';
-import 'package:mister_app/widgets/login/login_text_fields.dart';
+import 'package:mister_app/utils/app_routes.dart';
 
 class LoginFooter extends StatelessWidget {
   const LoginFooter({super.key});
@@ -26,7 +25,9 @@ class LoginFooter extends StatelessWidget {
         SizedBox(
           width: double.infinity,
           child: OutlinedButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushReplacementNamed(context, AppRoutes.register);
+            },
             style: OutlinedButton.styleFrom(
               padding: const EdgeInsets.symmetric(vertical: 14),
               side: const BorderSide(color: Colors.blue),
