@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:mister_app/screens/forget_screen.dart';
 import 'package:mister_app/screens/login_screen.dart';
 import 'package:mister_app/screens/register_screen.dart';
 
 class AppRoutes {
   static const String login = '/login';
   static const String register = '/register';
+  static const String forget = '/forget';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -12,6 +14,8 @@ class AppRoutes {
         return _fadeSlideRoute(const LoginScreen(), settings);
       case register:
         return _fadeSlideRoute(const RegisterScreen(), settings);
+      case forget:
+        return _fadeSlideRoute(const ForgetScreen(), settings);
       default:
         return MaterialPageRoute(
           builder: (_) => const Scaffold(

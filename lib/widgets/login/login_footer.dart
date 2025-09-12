@@ -10,10 +10,14 @@ class LoginFooter extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         // Forgot Password
-        const Text(
-          "Forgot password?",
-          style: TextStyle(color: Colors.grey),
-        ),
+        TextButton(
+            onPressed: () {
+              Navigator.pushNamed(context, AppRoutes.forget);
+            },
+            child: const Text(
+              "Forgot password?",
+              style: TextStyle(color: Colors.grey),
+            )),
         const SizedBox(height: 20),
         // Don't have an account? Sign Up
         const Text(
