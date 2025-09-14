@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:url_launcher/url_launcher.dart';
+import '../widgets/payment/grade_dropdown.dart';
+import '../widgets/payment/pay_button.dart';
+import '../widgets/payment/payment_methods_list.dart';
 
 class PaymentScreen extends StatefulWidget {
   const PaymentScreen({super.key});
@@ -24,7 +29,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
     {"label": "بطاقة بنكية", "icon": Icons.credit_card, "color": Colors.blue},
   ];
 
-  void _confirmPayment() {
+  /// فتح API الدفع
+  Future<void> _goToPaymentApi() async {
     if (_selectedGrade == null || _selectedPaymentMethod == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -35,45 +41,46 @@ class _PaymentScreenState extends State<PaymentScreen> {
       return;
     }
 
-    showDialog(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        title: const Text(
-          "تأكيد الدفع",
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blue),
+    String apiUrl = "";
+
+    switch (_selectedPaymentMethod) {
+      case "فودافون كاش":
+        apiUrl = "https://example.com/api/payment/vodafone";
+        break;
+      case "وي كاش":
+        apiUrl = "https://example.com/api/payment/we";
+        break;
+      case "اتصالات كاش":
+        apiUrl = "https://example.com/api/payment/etisalat";
+        break;
+      case "بطاقة بنكية":
+        apiUrl = "https://example.com/api/payment/card";
+        break;
+    }
+
+    try {
+      final uri = Uri.parse(apiUrl);
+      if (await canLaunchUrl(uri)) {
+        await launchUrl(uri, mode: LaunchMode.externalApplication);
+      } else {
+        throw "تعذر فتح صفحة الدفع";
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(e.toString()),
+          backgroundColor: Colors.redAccent,
         ),
-        content: Text(
-          "لقد اخترت $_selectedGrade.\nوسيلة الدفع: $_selectedPaymentMethod.\nيرجى إتمام الدفع وسيتم التفعيل بعد تأكيد المدرس.",
-          style: const TextStyle(fontSize: 16),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(ctx),
-            child: const Text("إلغاء", style: TextStyle(color: Colors.grey)),
-          ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.blue,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-            ),
-            onPressed: () {
-              Navigator.pop(ctx);
-              Navigator.pushReplacementNamed(context, '/home');
-            },
-            child: const Text("تأكيد الدفع"),
-          ),
-        ],
-      ),
-    );
+      );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        width: 1.sw, // العرض 100%
+        height: 1.sh, // الطول 100%
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
@@ -83,16 +90,17 @@ class _PaymentScreenState extends State<PaymentScreen> {
         ),
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: EdgeInsets.symmetric(horizontal: 0.05.sw), // 5% من العرض
             child: Container(
-              padding: const EdgeInsets.all(20),
+              width: 0.9.sw, // 90% من العرض
+              padding: EdgeInsets.all(0.05.sw), // 5% من العرض
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(20.r),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withOpacity(0.1),
-                    blurRadius: 10,
+                    blurRadius: 10.r,
                     offset: const Offset(0, 5),
                   ),
                 ],
@@ -101,102 +109,38 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Text(
+                    Text(
                       "إتمام عملية الدفع",
                       style: TextStyle(
-                        fontSize: 22,
+                        fontSize: 20.sp, // مقاس الخط متجاوب
                         fontWeight: FontWeight.bold,
                         color: Colors.blue,
                       ),
                     ),
-                    const SizedBox(height: 20),
+                    SizedBox(height: 0.02.sh),
 
-                    // اختيار الصف
-                    DropdownButtonFormField<String>(
-                      decoration: InputDecoration(
-                        labelText: "اختر الصف الدراسي",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-                      value: _selectedGrade,
-                      items: grades.map((grade) {
-                        return DropdownMenuItem<String>(
-                          value: grade,
-                          child: Text(grade),
-                        );
-                      }).toList(),
+                    /// اختيار الصف
+                    GradeDropdown(
+                      grades: grades,
+                      selectedGrade: _selectedGrade,
                       onChanged: (value) {
-                        setState(() {
-                          _selectedGrade = value;
-                        });
+                        setState(() => _selectedGrade = value);
                       },
                     ),
-                    const SizedBox(height: 20),
+                    SizedBox(height: 0.02.sh),
 
-                    // اختيار وسيلة الدفع
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: Text(
-                        "اختر وسيلة الدفع:",
-                        style:
-                            Theme.of(context).textTheme.titleMedium?.copyWith(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black87,
-                                ),
-                      ),
+                    /// اختيار وسيلة الدفع
+                    PaymentMethodsList(
+                      methods: paymentMethods,
+                      selectedMethod: _selectedPaymentMethod,
+                      onChanged: (value) {
+                        setState(() => _selectedPaymentMethod = value);
+                      },
                     ),
-                    const SizedBox(height: 10),
-                    Column(
-                      children: paymentMethods.map((method) {
-                        return Container(
-                          margin: const EdgeInsets.symmetric(vertical: 6),
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: method['color'].withOpacity(0.6),
-                              width: 1.5,
-                            ),
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: RadioListTile<String>(
-                            value: method['label'],
-                            groupValue: _selectedPaymentMethod,
-                            onChanged: (value) {
-                              setState(() {
-                                _selectedPaymentMethod = value;
-                              });
-                            },
-                            title: Text(
-                              method['label'],
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: method['color'],
-                              ),
-                            ),
-                            secondary:
-                                Icon(method['icon'], color: method['color']),
-                          ),
-                        );
-                      }).toList(),
-                    ),
-                    const SizedBox(height: 20),
+                    SizedBox(height: 0.03.sh),
 
-                    // زر الدفع
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blue,
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 14, horizontal: 40),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-                      onPressed: _confirmPayment,
-                      child: const Text(
-                        "إتمام الدفع",
-                        style: TextStyle(fontSize: 16, color: Colors.white),
-                      ),
-                    ),
+                    /// زر الدفع
+                    PayButton(onPressed: _goToPaymentApi),
                   ],
                 ),
               ),

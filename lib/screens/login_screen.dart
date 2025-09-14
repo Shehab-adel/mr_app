@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mister_app/widgets/login/login_button.dart';
 import 'package:mister_app/widgets/login/login_footer.dart';
 import 'package:mister_app/widgets/login/login_form.dart';
@@ -8,14 +9,10 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final height = size.height;
-    final width = size.width;
-
     return Scaffold(
       resizeToAvoidBottomInset: false, // يمنع تحريك الشاشة مع الكيبورد
       body: Container(
-        height: size.height,
+        height: 1.sh, // 100% من ارتفاع الشاشة
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
@@ -25,29 +22,34 @@ class LoginScreen extends StatelessWidget {
         ),
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: EdgeInsets.symmetric(horizontal: 20.w),
             child: Container(
-              padding: const EdgeInsets.all(20),
+              padding: EdgeInsets.all(20.w),
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(20.r),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withOpacity(0.1),
-                    blurRadius: 10,
-                    offset: const Offset(0, 5),
+                    blurRadius: 10.r,
+                    offset: Offset(0, 5.h),
                   ),
                 ],
               ),
-              child: const SingleChildScrollView(
+              child: SingleChildScrollView(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    LoginForm(),
-                    SizedBox(height: 20),
-                    LoginButton(),
-                    SizedBox(height: 12),
-                    LoginFooter(),
+                    const LoginForm(),
+
+                    const LoginButton(),
+
+                    /// Login Button
+
+                    SizedBox(height: 12.h),
+
+                    /// Forgot Password
+                    const LoginFooter()
                   ],
                 ),
               ),

@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mister_app/widgets/register/register_button.dart';
 import 'package:mister_app/widgets/register/register_footer.dart';
 import 'package:mister_app/widgets/register/register_form.dart';
-import 'package:mister_app/widgets/register/register_header.dart';
 
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Container(
-        height: size.height,
+        height: 1.sh,
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
@@ -24,34 +22,31 @@ class RegisterScreen extends StatelessWidget {
         ),
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: EdgeInsets.symmetric(horizontal: 20.w),
             child: Container(
-              padding: const EdgeInsets.all(20),
+              padding: EdgeInsets.all(20.w),
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(20.r),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withOpacity(0.1),
-                    blurRadius: 10,
-                    offset: const Offset(0, 5),
+                    blurRadius: 10.r,
+                    offset: Offset(0, 5.h),
                   ),
                 ],
               ),
               child: SingleChildScrollView(
-                child: const Column(
+                child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    RegisterForm(),
-
-                    SizedBox(height: 20),
-
+                    const RegisterForm(),
+                    SizedBox(height: 20.h),
                     // Sign up button
-                    RegisterButton(),
-                    SizedBox(height: 15),
-
+                    const RegisterButton(),
+                    SizedBox(height: 15.h),
                     // Already have account
-                    RegisterFooter()
+                    const RegisterFooter()
                   ],
                 ),
               ),

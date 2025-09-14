@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mister_app/utils/app_routes.dart';
 import 'utils/app_theme.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(ScreenUtilInit(
+    designSize: const Size(375, 812), // مقاس تصميمك الأساسي (iPhone X مثلاً)
+    builder: (context, child) => const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -16,7 +20,7 @@ class MyApp extends StatelessWidget {
       title: 'Mr. App',
       theme: AppTheme.lightTheme,
       onGenerateRoute: AppRoutes.generateRoute,
-      initialRoute: AppRoutes.login,
+      initialRoute: AppRoutes.payment,
     );
   }
 }

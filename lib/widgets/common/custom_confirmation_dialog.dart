@@ -24,9 +24,9 @@ class CustomConfirmationDialog extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
           gradient: const LinearGradient(
             colors: [
-              Color(0xFF2196F3), // الأزرق الأساسي
-              Color(0xFF42A5F5), // أزرق أفتح
-              Colors.white, // أبيض
+              Color(0xFF2196F3),
+              Color(0xFF42A5F5),
+              Colors.white,
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,

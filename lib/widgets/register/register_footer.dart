@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../utils/app_routes.dart';
 
@@ -18,7 +19,7 @@ class RegisterFooter extends StatelessWidget {
           ),
         ),
 
-        const SizedBox(height: 10),
+        SizedBox(height: 10.h),
         // Login Button
         SizedBox(
           width: double.infinity,
@@ -27,15 +28,15 @@ class RegisterFooter extends StatelessWidget {
               Navigator.pushReplacementNamed(context, AppRoutes.login);
             },
             style: OutlinedButton.styleFrom(
-              padding: const EdgeInsets.symmetric(vertical: 14),
+              padding: EdgeInsets.symmetric(vertical: 14.w),
               side: const BorderSide(color: Colors.blue),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(8.r),
               ),
             ),
-            child: const Text(
+            child: Text(
               "Login",
-              style: TextStyle(color: Colors.blue, fontSize: 16),
+              style: TextStyle(color: Colors.blue, fontSize: 16.sp),
             ),
           ),
         ),

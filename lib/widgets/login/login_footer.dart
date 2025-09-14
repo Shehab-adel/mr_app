@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mister_app/utils/app_routes.dart';
 
 class LoginFooter extends StatelessWidget {
@@ -11,21 +12,28 @@ class LoginFooter extends StatelessWidget {
       children: [
         // Forgot Password
         TextButton(
-            onPressed: () {
-              Navigator.pushNamed(context, AppRoutes.forget);
-            },
-            child: const Text(
-              "Forgot password?",
-              style: TextStyle(color: Colors.grey),
-            )),
-        const SizedBox(height: 20),
-        // Don't have an account? Sign Up
-        const Text(
-          "Don't have an account?",
-          style: TextStyle(color: Colors.grey),
+          onPressed: () {
+            Navigator.pushNamed(context, AppRoutes.forget);
+          },
+          child: Text(
+            "Forgot password?",
+            style: TextStyle(
+              color: Colors.grey,
+              fontSize: 14.sp,
+            ),
+          ),
         ),
 
-        const SizedBox(height: 20),
+        SizedBox(height: 20.h),
+
+        /// Don't have an account?
+        Text(
+          "Don't have an account?",
+          style: TextStyle(color: Colors.grey, fontSize: 14.sp),
+        ),
+        SizedBox(height: 20.h),
+
+        /// Sign Up
         SizedBox(
           width: double.infinity,
           child: OutlinedButton(
@@ -33,27 +41,31 @@ class LoginFooter extends StatelessWidget {
               Navigator.pushReplacementNamed(context, AppRoutes.register);
             },
             style: OutlinedButton.styleFrom(
-              padding: const EdgeInsets.symmetric(vertical: 14),
+              padding: EdgeInsets.symmetric(vertical: 14.h),
               side: const BorderSide(color: Colors.blue),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(8.r),
               ),
             ),
-            child: const Text(
+            child: Text(
               "Sign up",
-              style: TextStyle(color: Colors.blue, fontSize: 16),
+              style: TextStyle(
+                color: Colors.blue,
+                fontSize: 16.sp,
+              ),
             ),
           ),
         ),
+        SizedBox(height: 12.h),
 
-        const SizedBox(height: 12),
-
-        // Continue as Guest
-        const Text(
+        /// Continue as Guest
+        Text(
           "Continue as Guest",
-          style: TextStyle(color: Colors.blue, fontSize: 16),
+          style: TextStyle(
+            color: Colors.blue,
+            fontSize: 16.sp,
+          ),
         ),
-
         // Forgot Password
       ],
     );
