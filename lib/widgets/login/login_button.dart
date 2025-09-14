@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mister_app/utils/app_routes.dart';
 
 class LoginButton extends StatelessWidget {
   const LoginButton({super.key});
@@ -8,7 +9,9 @@ class LoginButton extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushReplacementNamed(context, AppRoutes.selectedGeade);
+        },
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.blue,
           padding: const EdgeInsets.symmetric(vertical: 14),
