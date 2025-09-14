@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mister_app/widgets/login/login_button.dart';
 import 'package:mister_app/widgets/login/login_footer.dart';
-import 'package:mister_app/widgets/login/login_header.dart';
 import 'package:mister_app/widgets/login/login_form.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -15,52 +14,33 @@ class LoginScreen extends StatelessWidget {
 
     return Scaffold(
       resizeToAvoidBottomInset: false, // يمنع تحريك الشاشة مع الكيبورد
-      body: SizedBox(
-        height: height,
-        width: width,
-        child: Stack(
-          children: [
-            // الخلفية (نص أزرق ونص أبيض)
-            Column(
-              children: [
-                Expanded(
-                  flex: 2,
-                  child: Container(
-                    color: Colors.blue,
-                    child: const Center(
-                      child: LoginHeader(),
-                    ),
+      body: Container(
+        height: size.height,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Color(0xFF2196F3), Colors.white],
+          ),
+        ),
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Container(
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    blurRadius: 10,
+                    offset: const Offset(0, 5),
                   ),
-                ),
-                Expanded(
-                  flex: 3,
-                  child: Container(color: Colors.white),
-                ),
-              ],
-            ),
-
-            // الكارد (الفورم)
-            Positioned(
-              top: height * 0.28, // نسبة بدل رقم ثابت
-              left: width * 0.05, // نسبة (5% من العرض)
-              right: width * 0.05,
-              child: Container(
-                padding: EdgeInsets.symmetric(
-                  horizontal: width * 0.06,
-                  vertical: height * 0.025,
-                ),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(width * 0.05),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.1),
-                      blurRadius: width * 0.04,
-                      offset: Offset(0, height * 0.005),
-                    ),
-                  ],
-                ),
-                child: const Column(
+                ],
+              ),
+              child: const SingleChildScrollView(
+                child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     LoginForm(),
@@ -72,7 +52,7 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
             ),
-          ],
+          ),
         ),
       ),
     );

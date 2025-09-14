@@ -13,45 +13,32 @@ class RegisterScreen extends StatelessWidget {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: SizedBox(
+      body: Container(
         height: size.height,
-        child: Stack(
-          children: [
-            // الخلفية (نص أزرق ونص أبيض)
-            Column(
-              children: [
-                Expanded(
-                  flex: 2,
-                  child: Container(
-                    color: Colors.blue,
-                    child: const Center(child: RegisterHeader()),
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Color(0xFF2196F3), Colors.white],
+          ),
+        ),
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Container(
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    blurRadius: 10,
+                    offset: const Offset(0, 5),
                   ),
-                ),
-                Expanded(
-                  flex: 3,
-                  child: Container(color: Colors.white),
-                ),
-              ],
-            ),
-
-            // الكارد (الفورم)
-            Positioned(
-              top: size.height * 0.28,
-              left: 20,
-              right: 20,
-              child: Container(
-                padding: const EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(20),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.1),
-                      blurRadius: 10,
-                      offset: const Offset(0, 5),
-                    ),
-                  ],
-                ),
+                ],
+              ),
+              child: SingleChildScrollView(
                 child: const Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -69,7 +56,7 @@ class RegisterScreen extends StatelessWidget {
                 ),
               ),
             ),
-          ],
+          ),
         ),
       ),
     );

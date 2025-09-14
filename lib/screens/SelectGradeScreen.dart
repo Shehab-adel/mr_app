@@ -14,6 +14,7 @@ class SelectGradeScreen extends StatelessWidget {
 
     // رسالة تأكيد
     showDialog(
+      // ignore: use_build_context_synchronously
       context: context,
       builder: (ctx) => CustomConfirmationDialog(
         title: "تأكيد الاختيار",
