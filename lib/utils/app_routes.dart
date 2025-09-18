@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:mister_app/screens/SelectGradeScreen.dart';
 import 'package:mister_app/screens/forget_screen.dart';
 import 'package:mister_app/screens/home_screen.dart';
 import 'package:mister_app/screens/login_screen.dart';
 import 'package:mister_app/screens/payment_screen.dart';
 import 'package:mister_app/screens/register_screen.dart';
+import 'package:mister_app/screens/videos/player_videos_screen.dart';
+import 'package:mister_app/screens/videos/playlists_screen.dart';
 
 class AppRoutes {
   static const String login = '/login';
@@ -11,6 +14,9 @@ class AppRoutes {
   static const String forget = '/forget';
   static const String payment = '/payment';
   static const String home = '/home';
+  static const String plylist = '/videos';
+  static const String plylitPlayer = '/videos_player';
+  static const String selectGrade = '/select_grade';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -22,8 +28,20 @@ class AppRoutes {
         return _fadeSlideRoute(const ForgetScreen(), settings);
       case payment:
         return _fadeSlideRoute(const PaymentScreen(), settings);
+      case selectGrade:
+        return _fadeSlideRoute(const SelectGradeScreen(), settings);
       case home:
         return _fadeSlideRoute(const HomeScreen(), settings);
+      case plylist:
+        return _fadeSlideRoute(PlaylistsScreen(), settings);
+      case plylitPlayer:
+        return _fadeSlideRoute(
+            const PlayerVideosScreen(
+              playlistId: 'UC_x5XG1OV2P6uZZ5FSM9Ttw',
+              title: '',
+            ),
+            settings);
+
       default:
         return MaterialPageRoute(
           builder: (_) => const Scaffold(

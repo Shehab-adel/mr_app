@@ -3,6 +3,17 @@ import 'package:flutter/material.dart';
 class AppTheme {
   static ThemeData lightTheme = ThemeData(
     primarySwatch: Colors.blue,
+    // 👇 هنا نخلي أي أيقونة في الـ AppBar تظهر باللون الأبيض
+    appBarTheme: const AppBarTheme(
+      iconTheme: IconThemeData(color: Colors.white),
+      titleTextStyle: TextStyle(
+        color: Colors.white,
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
+      ),
+      backgroundColor: Colors.blue,
+      elevation: 0,
+    ),
     inputDecorationTheme: InputDecorationTheme(
       contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
       // النص العادي (قبل ما الفيلد يتحدد)

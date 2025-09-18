@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mister_app/utils/app_routes.dart';
 import 'feature_card.dart';
 
 class FeatureGrid extends StatelessWidget {
@@ -16,17 +17,35 @@ class FeatureGrid extends StatelessWidget {
         mainAxisSpacing: 15.h,
         childAspectRatio: 2.3,
         physics: const NeverScrollableScrollPhysics(),
-        children: const [
+        children: [
           FeatureCard(
-              icon: Icons.play_circle_fill, title: "Videos", color: Colors.red),
+              onTap: () {
+                Navigator.pushNamed(context, AppRoutes.plylist);
+              },
+              icon: Icons.play_circle_fill,
+              title: "Videos",
+              color: Colors.red),
           FeatureCard(
-              icon: Icons.notes, title: "Summaries", color: Colors.blue),
+              onTap: () {
+                Navigator.pushNamed(context, 'AppRoutes.summaries');
+              },
+              icon: Icons.notes,
+              title: "Summaries",
+              color: Colors.blue),
           FeatureCard(
+              onTap: () {
+                Navigator.pushNamed(context, 'AppRoutes.questionBank');
+              },
               icon: Icons.help_outline,
               title: "Question Bank",
               color: Colors.green),
           FeatureCard(
-              icon: Icons.grade, title: "Exams", color: Colors.deepPurple),
+              onTap: () {
+                Navigator.pushNamed(context, 'AppRoutes.exams');
+              },
+              icon: Icons.grade,
+              title: "Exams",
+              color: Colors.deepPurple),
         ],
       ),
     );
