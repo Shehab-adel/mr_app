@@ -39,8 +39,13 @@ dependencies:
   url_launcher: ^6.3.1
   flutter_screenutil: ^5.9.3
   youtube_player_iframe: ^5.1.2
-  youtube_player_flutter: ^8.1.2
+  youtube_player_flutter: ^9.1.2
   http: ^1.2.1
+  path_provider: ^2.1.4
+  syncfusion_flutter_pdfviewer: ^27.2.5
+  open_filex: ^4.7.0
+  win32: ^5.13.0
+  flutter_inappwebview: ^6.1.5
 
 dev_dependencies:
   flutter_test:

@@ -5,6 +5,7 @@ import 'package:mister_app/screens/home_screen.dart';
 import 'package:mister_app/screens/login_screen.dart';
 import 'package:mister_app/screens/payment_screen.dart';
 import 'package:mister_app/screens/register_screen.dart';
+import 'package:mister_app/screens/summeries/summaries_screen.dart';
 import 'package:mister_app/screens/videos/player_videos_screen.dart';
 import 'package:mister_app/screens/videos/playlists_screen.dart';
 
@@ -17,6 +18,7 @@ class AppRoutes {
   static const String plylist = '/videos';
   static const String plylitPlayer = '/videos_player';
   static const String selectGrade = '/select_grade';
+  static const String summaries = '/summaries';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -34,6 +36,9 @@ class AppRoutes {
         return _fadeSlideRoute(const HomeScreen(), settings);
       case plylist:
         return _fadeSlideRoute(PlaylistsScreen(), settings);
+      case summaries:
+        return _fadeSlideRoute(const SummariesScreen(), settings);
+
       case plylitPlayer:
         return _fadeSlideRoute(
             const PlayerVideosScreen(

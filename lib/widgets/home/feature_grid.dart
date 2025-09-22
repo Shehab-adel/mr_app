@@ -27,7 +27,7 @@ class FeatureGrid extends StatelessWidget {
               color: Colors.red),
           FeatureCard(
               onTap: () {
-                Navigator.pushNamed(context, 'AppRoutes.summaries');
+                Navigator.pushNamed(context, AppRoutes.summaries);
               },
               icon: Icons.notes,
               title: "Summaries",

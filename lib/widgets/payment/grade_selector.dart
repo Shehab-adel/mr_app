@@ -13,7 +13,7 @@ class GradeSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField<String>(
-      value: selectedGrade,
+      initialValue: selectedGrade,
       hint: const Text("اختر الصف"),
       items: const [
         DropdownMenuItem(value: "الصف الأول", child: Text("الصف الأول")),

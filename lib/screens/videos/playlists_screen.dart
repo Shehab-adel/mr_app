@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../models/playlist_model.dart';
 import '../../services/youtub_services.dart';
 import '../../widgets/playlists/playlist_card.dart';
-import '../../widgets/playlists/playlists_appbar.dart';
+import '../../widgets/common/custom_appbare.dart';
 
 class PlaylistsScreen extends StatelessWidget {
   final String channelId = "UC_hK9fOxyy_TM8FJGXIyG8Q";
@@ -14,7 +14,9 @@ class PlaylistsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const PlaylistsAppBar(),
+      appBar: const CustomAppbare(
+        title: "Playlists",
+      ),
       body: FutureBuilder<List<Playlist>>(
         future: service.fetchAllPlaylists(channelId),
         builder: (context, snapshot) {

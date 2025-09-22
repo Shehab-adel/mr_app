@@ -22,7 +22,7 @@ class GradeDropdown extends StatelessWidget {
           borderRadius: BorderRadius.circular(12.r),
         ),
       ),
-      value: selectedGrade,
+      initialValue: selectedGrade,
       items: grades.map((grade) {
         return DropdownMenuItem<String>(
           value: grade,
