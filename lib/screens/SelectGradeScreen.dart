@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mister_app/utils/app_routes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../widgets/common/custom_confirmation_dialog.dart';
@@ -22,7 +23,7 @@ class SelectGradeScreen extends StatelessWidget {
         onCancel: () => Navigator.pop(ctx),
         onConfirm: () {
           Navigator.pop(ctx);
-          Navigator.pushReplacementNamed(context, '/home');
+          Navigator.pushReplacementNamed(context, AppRoutes.home);
         },
       ),
     );

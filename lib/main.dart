@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       title: 'Mr. App',
       theme: AppTheme.lightTheme,
       onGenerateRoute: AppRoutes.generateRoute,
-      initialRoute: AppRoutes.home,
+      initialRoute: AppRoutes.login,
     );
   }
 }

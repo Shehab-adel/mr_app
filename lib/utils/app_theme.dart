@@ -3,7 +3,13 @@ import 'package:flutter/material.dart';
 class AppTheme {
   static ThemeData lightTheme = ThemeData(
     primarySwatch: Colors.blue,
-    // 👇 هنا نخلي أي أيقونة في الـ AppBar تظهر باللون الأبيض
+
+    // 👇 نخلي أي ProgressIndicator في التطبيق لونه أزرق
+    progressIndicatorTheme: const ProgressIndicatorThemeData(
+      color: Colors.blue,
+    ),
+
+    // 👇 AppBar
     appBarTheme: const AppBarTheme(
       iconTheme: IconThemeData(color: Colors.white),
       titleTextStyle: TextStyle(
@@ -14,15 +20,14 @@ class AppTheme {
       backgroundColor: Colors.blue,
       elevation: 0,
     ),
+
+    // 👇 InputDecoration
     inputDecorationTheme: InputDecorationTheme(
       contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
-      // النص العادي (قبل ما الفيلد يتحدد)
       labelStyle: TextStyle(
         color: Colors.grey.shade600,
         fontSize: 14,
       ),
-
-      // النص العائم (لما الفيلد يتحدد ويطلع فوق)
       floatingLabelStyle: const TextStyle(
         color: Colors.blue,
         fontSize: 14,
