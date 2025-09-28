@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:mister_app/widgets/register/register_button.dart';
-import 'package:mister_app/widgets/register/register_footer.dart';
-import 'package:mister_app/widgets/register/register_form.dart';
+import 'package:mister_app/cubit/auth/register/register_state.dart';
+import 'package:mister_app/cubit/auth/register_cubit.dart';
+import '../widgets/register/register_button.dart';
+import '../widgets/register/register_footer.dart';
+import '../widgets/register/register_form.dart';
 
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key});
@@ -36,19 +39,35 @@ class RegisterScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const RegisterForm(),
-                    SizedBox(height: 20.h),
-                    // Sign up button
-                    const RegisterButton(),
-                    SizedBox(height: 15.h),
-                    // Already have account
-                    const RegisterFooter()
-                  ],
-                ),
+              child: BlocConsumer<RegisterCubit, RegisterState>(
+                listener: (context, state) {
+                  if (state is RegisterSuccess) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                          content: Text("Account created successfully ✅")),
+                    );
+                  } else if (state is RegisterError) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text(state.message)),
+                    );
+                  }
+                },
+                builder: (context, state) {
+                  return SingleChildScrollView(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const RegisterForm(),
+                        SizedBox(height: 20.h),
+                        state is RegisterLoading
+                            ? const CircularProgressIndicator()
+                            : const RegisterButton(),
+                        SizedBox(height: 15.h),
+                        const RegisterFooter()
+                      ],
+                    ),
+                  );
+                },
               ),
             ),
           ),

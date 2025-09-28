@@ -4,18 +4,20 @@ class CustomTextField extends StatelessWidget {
   final String label;
   final bool obscureText;
   final TextEditingController? controller;
+  final String? Function(String?)? validator;
 
-  const CustomTextField({
-    super.key,
-    required this.label,
-    this.obscureText = false,
-    this.controller,
-  });
+  const CustomTextField(
+      {super.key,
+      required this.label,
+      this.obscureText = false,
+      this.controller,
+      this.validator});
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
       controller: controller,
+
       obscureText: obscureText,
       cursorColor: Colors.grey, // نفس اللي عملناه في login
       decoration: InputDecoration(
@@ -30,6 +32,7 @@ class CustomTextField extends StatelessWidget {
           borderSide: BorderSide(color: Colors.grey.shade400, width: 2),
         ),
       ),
+      validator: validator,
     );
   }
 }

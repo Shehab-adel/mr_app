@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../models/playlist_model.dart';
-import '../../services/youtub_services.dart';
+import 'package:mister_app/models/playlist_model.dart';
+import 'package:mister_app/services/youtub_services.dart';
+import 'package:mister_app/utils/app_strings.dart';
 import '../../widgets/playlists/playlist_card.dart';
 import '../../widgets/common/custom_appbare.dart';
 
 class PlaylistsScreen extends StatelessWidget {
-  final String channelId = "UC_hK9fOxyy_TM8FJGXIyG8Q";
+  final String channelId = AppStrings.channelId;
   final YoutubeService service = YoutubeService();
 
   PlaylistsScreen({super.key});
@@ -15,7 +16,7 @@ class PlaylistsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppbare(
-        title: "Playlists",
+        title: AppStrings.plylists,
       ),
       body: FutureBuilder<List<Playlist>>(
         future: service.fetchAllPlaylists(channelId),
