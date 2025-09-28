@@ -1,34 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mister_app/cubit/auth/register/register_state.dart';
+import 'package:mister_app/cubit/auth/signin/signin_state.dart';
 import 'package:mister_app/services/auth_service.dart';
 
-class RegisterCubit extends Cubit<RegisterState> {
-  RegisterCubit(this._service) : super(RegisterInitial());
+class SigninCubit extends Cubit<SigninState> {
+  SigninCubit(this._service) : super(SigninInatial());
 
   final AuthService _service;
 
-  static RegisterCubit get(context) => BlocProvider.of(context);
+  static SigninCubit get(context) => BlocProvider.of(context);
 
   final formKey = GlobalKey<FormState>();
-  final nameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  final confirmPasswordController = TextEditingController();
 
-  Future<void> registerUser() async {
+  Future<void> signinUser() async {
     if (formKey.currentState!.validate()) {
-      emit(RegisterLoading());
+      emit(SigninLoading());
 
       try {
-        final user = await _service.registerUser(
-          name: nameController.text.trim(),
+        final user = await _service.signinUser(
           email: emailController.text.trim(),
           password: passwordController.text.trim(),
         );
-        emit(RegisterSuccess(user));
+        emit(SigninSuccess(user));
       } catch (e) {
-        emit(RegisterError(
+        emit(SigninError(
           e.toString().replaceFirst("Exception: ", ""),
         ));
       }
@@ -37,10 +34,8 @@ class RegisterCubit extends Cubit<RegisterState> {
 
   @override
   Future<void> close() {
-    nameController.dispose();
     emailController.dispose();
     passwordController.dispose();
-    confirmPasswordController.dispose();
     return super.close();
   }
 }

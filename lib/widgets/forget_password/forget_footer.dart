@@ -10,7 +10,7 @@ class ForgetFooter extends StatelessWidget {
         Navigator.pop(context);
       },
       child: const Text(
-        "Back to Login",
+        "Back to Signin",
         style: TextStyle(color: Colors.blue),
       ),
     );

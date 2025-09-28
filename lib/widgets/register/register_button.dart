@@ -23,11 +23,7 @@ class RegisterButton extends StatelessWidget {
         ),
         onPressed: () {
           if (cubit.formKey.currentState!.validate()) {
-            cubit.registerUser(
-              name: cubit.nameController.text.trim(),
-              email: cubit.emailController.text.trim(),
-              password: cubit.passwordController.text.trim(),
-            );
+            cubit.registerUser();
           }
         },
         child: Text(

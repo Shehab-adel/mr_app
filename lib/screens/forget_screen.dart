@@ -18,7 +18,7 @@ class ForgetScreen extends StatelessWidget {
         height: size.height,
         child: Stack(
           children: [
-            // الخلفية (نفس فكرة Login/Register)
+            // الخلفية (نفس فكرة Signin/Register)
             Column(
               children: [
                 Expanded(flex: 2, child: Container(color: Colors.blue)),

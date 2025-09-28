@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mister_app/utils/app_routes.dart';
 
-class LoginFooter extends StatelessWidget {
-  const LoginFooter({super.key});
+class SigninFooter extends StatelessWidget {
+  const SigninFooter({super.key});
 
   @override
   Widget build(BuildContext context) {

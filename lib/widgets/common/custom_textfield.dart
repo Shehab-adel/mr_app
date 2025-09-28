@@ -19,7 +19,7 @@ class CustomTextField extends StatelessWidget {
       controller: controller,
 
       obscureText: obscureText,
-      cursorColor: Colors.grey, // نفس اللي عملناه في login
+      cursorColor: Colors.grey, // نفس اللي عملناه في Signin
       decoration: InputDecoration(
         labelText: label,
         border: OutlineInputBorder(

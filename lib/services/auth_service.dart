@@ -1,11 +1,13 @@
 import 'package:dio/dio.dart';
+import 'package:mister_app/utils/app_strings.dart';
+import 'package:mister_app/models/user_model.dart';
 
-class RegisterService {
+class AuthService {
   final Dio _dio = Dio(
-    BaseOptions(baseUrl: "https://edu-master-js.vercel.app/api/"),
+    BaseOptions(baseUrl: AppStrings.baseUrl),
   );
 
-  Future<Map<String, dynamic>> registerUser({
+  Future<UserModel> registerUser({
     required String name,
     required String email,
     required String password,
@@ -19,22 +21,42 @@ class RegisterService {
           "password": password,
         },
       );
-
-      return {
-        "success": true,
-        "data": response.data,
-      };
-    } catch (e) {
-      if (e is DioException) {
-        return {
-          "success": false,
-          "message": e.response?.data["message"] ?? "Something went wrong",
-        };
-      }
-      return {
-        "success": false,
-        "message": e.toString(),
-      };
+      return UserModel.fromJson(response.data);
+    } on DioException catch (e) {
+      throw Exception(_handleDioError(e));
     }
+  }
+
+  Future<UserModel> signinUser({
+    required String email,
+    required String password,
+  }) async {
+    try {
+      final response = await _dio.post(
+        "auth/signin",
+        data: {
+          "email": email,
+          "password": password,
+        },
+      );
+      return UserModel.fromJson(response.data);
+    } on DioException catch (e) {
+      throw Exception(_handleDioError(e));
+    }
+  }
+
+  /// دالة خاصة لمعالجة الأخطاء من Dio
+  String _handleDioError(DioException e) {
+    String errorMessage = "حدث خطأ، حاول مرة أخرى";
+
+    if (e.response != null && e.response!.data != null) {
+      final data = e.response!.data;
+      if (data is Map && data.containsKey("message")) {
+        errorMessage = data["message"];
+      } else if (data is Map && data.containsKey("error")) {
+        errorMessage = data["error"];
+      }
+    }
+    return errorMessage;
   }
 }

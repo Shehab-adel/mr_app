@@ -20,12 +20,12 @@ class RegisterFooter extends StatelessWidget {
         ),
 
         SizedBox(height: 10.h),
-        // Login Button
+        // Signin Button
         SizedBox(
           width: double.infinity,
           child: OutlinedButton(
             onPressed: () {
-              Navigator.pushReplacementNamed(context, AppRoutes.login);
+              Navigator.pushReplacementNamed(context, AppRoutes.Signin);
             },
             style: OutlinedButton.styleFrom(
               padding: EdgeInsets.symmetric(vertical: 14.w),
@@ -35,7 +35,7 @@ class RegisterFooter extends StatelessWidget {
               ),
             ),
             child: Text(
-              "Login",
+              "Signin",
               style: TextStyle(color: Colors.blue, fontSize: 16.sp),
             ),
           ),
