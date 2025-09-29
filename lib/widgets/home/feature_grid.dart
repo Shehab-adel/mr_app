@@ -19,33 +19,55 @@ class FeatureGrid extends StatelessWidget {
         physics: const NeverScrollableScrollPhysics(),
         children: [
           FeatureCard(
-              onTap: () {
-                Navigator.pushNamed(context, AppRoutes.plylist);
-              },
-              icon: Icons.play_circle_fill,
-              title: "Videos",
-              color: Colors.red),
+            onTap: () {
+              Navigator.pushNamed(context, AppRoutes.plylist);
+            },
+            icon: Icons.play_circle_fill,
+            title: "Videos",
+            color: Colors.red,
+          ),
           FeatureCard(
-              onTap: () {
-                Navigator.pushNamed(context, AppRoutes.summaries);
-              },
-              icon: Icons.notes,
-              title: "Summaries",
-              color: Colors.blue),
+            onTap: () {
+              Navigator.pushNamed(context, AppRoutes.summaries);
+            },
+            icon: Icons.notes,
+            title: "Summaries",
+            color: Colors.blue,
+          ),
           FeatureCard(
-              onTap: () {
-                Navigator.pushNamed(context, 'AppRoutes.questionBank');
-              },
-              icon: Icons.help_outline,
-              title: "Question Bank",
-              color: Colors.green),
+            onTap: () {
+              // Navigator.pushNamed(context, AppRoutes.questionBank);
+            },
+            icon: Icons.help_outline,
+            title: "Question Bank",
+            color: Colors.green,
+          ),
           FeatureCard(
-              onTap: () {
-                Navigator.pushNamed(context, 'AppRoutes.exams');
-              },
-              icon: Icons.grade,
-              title: "Exams",
-              color: Colors.deepPurple),
+            onTap: () {
+              // Navigator.pushNamed(context, AppRoutes.exams);
+            },
+            icon: Icons.grade,
+            title: "Exams",
+            color: Colors.deepPurple,
+          ),
+          // جديد: Chat
+          FeatureCard(
+            onTap: () {
+              Navigator.pushNamed(context, AppRoutes.chat);
+            },
+            icon: Icons.chat_bubble_outline,
+            title: "Chat",
+            color: Colors.orange,
+          ),
+          // جديد: Profile
+          FeatureCard(
+            onTap: () {
+              Navigator.pushNamed(context, AppRoutes.profile);
+            },
+            icon: Icons.person_outline,
+            title: "Profile",
+            color: Colors.teal,
+          ),
         ],
       ),
     );

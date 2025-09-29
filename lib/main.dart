@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mister_app/cubit/auth/register_cubit.dart';
 import 'package:mister_app/cubit/auth/signin/signin_cubit.dart';
-import 'package:mister_app/cubit/profile/profile_cubit.dart';
+import 'package:mister_app/cubit/dashboard/profile/profile_cubit.dart';
 import 'package:mister_app/services/auth_service.dart';
 import 'package:mister_app/services/profile_service.dart';
 import 'package:mister_app/utils/app_routes.dart';

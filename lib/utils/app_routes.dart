@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mister_app/screens/SelectGradeScreen.dart';
+import 'package:mister_app/screens/dashboard/chat_screen.dart';
 import 'package:mister_app/screens/forget_screen.dart';
-import 'package:mister_app/screens/home_screen.dart';
-import 'package:mister_app/screens/profile_screen.dart';
+import 'package:mister_app/screens/dashboard/home_screen.dart';
+import 'package:mister_app/screens/dashboard/profile_screen.dart';
 import 'package:mister_app/screens/signin_screen.dart';
 import 'package:mister_app/screens/payment_screen.dart';
 import 'package:mister_app/screens/register_screen.dart';
@@ -23,6 +24,7 @@ class AppRoutes {
   static const String selectGrade = '/select_grade';
   static const String summaries = '/summaries';
   static const String profile = '/profile';
+  static const String chat = "/chat";
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -45,7 +47,9 @@ class AppRoutes {
       case summaries:
         return _fadeSlideRoute(const SummariesScreen(), settings);
       case profile:
-        return _fadeSlideRoute(ProfileScreen(), settings);
+        return _fadeSlideRoute(const ProfileScreen(), settings);
+      case chat:
+        return _fadeSlideRoute(const ChatScreen(), settings);
       case plylitPlayer:
         return _fadeSlideRoute(
             const PlayerVideosScreen(

@@ -22,9 +22,9 @@ class _SplashScreenState extends State<SplashScreen> {
     await Future.delayed(const Duration(seconds: 2)); // تعمل زي لوجو سكرين
 
     if (token != null && token.isNotEmpty) {
-      Navigator.pushReplacementNamed(context, AppRoutes.home);
+      Navigator.pushReplacementNamed(context, AppRoutes.selectGrade);
     } else {
-      Navigator.pushReplacementNamed(context, AppRoutes.signin);
+      Navigator.pushReplacementNamed(context, AppRoutes.selectGrade);
     }
   }
 
