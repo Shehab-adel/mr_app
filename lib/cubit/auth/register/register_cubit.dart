@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mister_app/cubit/auth/register/register_state.dart';
 import 'package:mister_app/services/auth_service.dart';
+import 'package:mister_app/widgets/common/custom_confirmation_dialog.dart';
 
 class RegisterCubit extends Cubit<RegisterState> {
   RegisterCubit(this._service) : super(RegisterInitial());
@@ -33,6 +34,35 @@ class RegisterCubit extends Cubit<RegisterState> {
         ));
       }
     }
+  }
+
+  // ✅ دالة تحديث بيانات الدراسة
+  Future<void> updateStudyInfo(String semester) async {
+    emit(UpdateStudyInfoLoading());
+    try {
+      final user = await _service.updateStudyInfo(semester);
+      emit(UpdateStudyInfoSuccess(user));
+    } catch (e) {
+      emit(UpdateStudyInfoError(
+        e.toString().replaceFirst("Exception: ", ""),
+      ));
+    }
+  }
+
+  void confirmSemester(
+      BuildContext context, String semester, String gradeName) {
+    showDialog(
+      context: context,
+      builder: (ctx) => CustomConfirmationDialog(
+        title: "تأكيد الاختيار",
+        content: "هل أنت متأكد أنك في $gradeName؟",
+        onCancel: () => Navigator.pop(ctx),
+        onConfirm: () {
+          Navigator.pop(ctx);
+          RegisterCubit.get(context).updateStudyInfo(semester);
+        },
+      ),
+    );
   }
 
   @override
