@@ -23,9 +23,7 @@ class SigninFooter extends StatelessWidget {
             ),
           ),
         ),
-
         SizedBox(height: 20.h),
-
         /// Don't have an account?
         Text(
           "Don't have an account?",
@@ -59,13 +57,22 @@ class SigninFooter extends StatelessWidget {
         SizedBox(height: 12.h),
 
         /// Continue as Guest
-        Text(
-          "Continue as Guest",
-          style: TextStyle(
-            color: Colors.blue,
-            fontSize: 16.sp,
+        TextButton(
+          onPressed: () {
+            Navigator.pushReplacementNamed(
+              context,
+              AppRoutes.selectGrade,
+            );
+          },
+          child: Text(
+            "Continue as Guest",
+            style: TextStyle(
+              color: Colors.blue,
+              fontSize: 16.sp,
+            ),
           ),
         ),
+
         // Forgot Password
       ],
     );

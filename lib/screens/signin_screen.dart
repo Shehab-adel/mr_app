@@ -4,9 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mister_app/cubit/auth/signin/signin_cubit.dart';
 import 'package:mister_app/cubit/auth/signin/signin_state.dart';
 import 'package:mister_app/utils/app_routes.dart';
-import 'package:mister_app/widgets/Signin/Signin_button.dart';
-import 'package:mister_app/widgets/Signin/Signin_footer.dart';
-import 'package:mister_app/widgets/Signin/Signin_form.dart';
+import 'package:mister_app/widgets/signin/signin_button.dart';
+import 'package:mister_app/widgets/signin/signin_footer.dart';
+import 'package:mister_app/widgets/signin/signin_form.dart';
 
 class SigninScreen extends StatelessWidget {
   const SigninScreen({super.key});

@@ -1,13 +1,13 @@
 import 'package:dio/dio.dart';
 import 'package:mister_app/utils/app_strings.dart';
-import 'package:mister_app/models/user_model.dart';
+import 'package:mister_app/models/user_auth_model.dart';
 
 class AuthService {
   final Dio _dio = Dio(
     BaseOptions(baseUrl: AppStrings.baseUrl),
   );
 
-  Future<UserModel> registerUser({
+  Future<UserAuthModel> registerUser({
     required String name,
     required String email,
     required String password,
@@ -21,13 +21,13 @@ class AuthService {
           "password": password,
         },
       );
-      return UserModel.fromJson(response.data);
+      return UserAuthModel.fromJson(response.data);
     } on DioException catch (e) {
       throw Exception(_handleDioError(e));
     }
   }
 
-  Future<UserModel> signinUser({
+  Future<UserAuthModel> signinUser({
     required String email,
     required String password,
   }) async {
@@ -39,7 +39,7 @@ class AuthService {
           "password": password,
         },
       );
-      return UserModel.fromJson(response.data);
+      return UserAuthModel.fromJson(response.data);
     } on DioException catch (e) {
       throw Exception(_handleDioError(e));
     }

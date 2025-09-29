@@ -1,4 +1,4 @@
-import 'package:mister_app/models/user_model.dart';
+import 'package:mister_app/models/user_auth_model.dart';
 
 abstract class SigninState {}
 
@@ -7,7 +7,7 @@ class SigninInatial extends SigninState {}
 class SigninLoading extends SigninState {}
 
 class SigninSuccess extends SigninState {
-  final UserModel user;
+  final UserAuthModel user;
   SigninSuccess(this.user);
 }
 

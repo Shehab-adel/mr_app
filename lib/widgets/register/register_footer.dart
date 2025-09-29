@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../utils/app_routes.dart';
 
 class RegisterFooter extends StatelessWidget {
@@ -25,7 +24,7 @@ class RegisterFooter extends StatelessWidget {
           width: double.infinity,
           child: OutlinedButton(
             onPressed: () {
-              Navigator.pushReplacementNamed(context, AppRoutes.Signin);
+              Navigator.pushReplacementNamed(context, AppRoutes.signin);
             },
             style: OutlinedButton.styleFrom(
               padding: EdgeInsets.symmetric(vertical: 14.w),

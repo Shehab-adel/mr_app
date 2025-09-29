@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mister_app/screens/SelectGradeScreen.dart';
 import 'package:mister_app/screens/forget_screen.dart';
 import 'package:mister_app/screens/home_screen.dart';
-import 'package:mister_app/screens/Signin_screen.dart';
+import 'package:mister_app/screens/profile_screen.dart';
+import 'package:mister_app/screens/signin_screen.dart';
 import 'package:mister_app/screens/payment_screen.dart';
 import 'package:mister_app/screens/register_screen.dart';
 import 'package:mister_app/screens/splash_screen.dart';
@@ -12,7 +13,7 @@ import 'package:mister_app/screens/videos/playlists_screen.dart';
 
 class AppRoutes {
   static const String splash = '/splash';
-  static const String Signin = '/Signin';
+  static const String signin = '/Signin';
   static const String register = '/register';
   static const String forget = '/forget';
   static const String payment = '/payment';
@@ -21,12 +22,13 @@ class AppRoutes {
   static const String plylitPlayer = '/videos_player';
   static const String selectGrade = '/select_grade';
   static const String summaries = '/summaries';
+  static const String profile = '/profile';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case splash:
         return _fadeSlideRoute(const SplashScreen(), settings);
-      case Signin:
+      case signin:
         return _fadeSlideRoute(const SigninScreen(), settings);
       case register:
         return _fadeSlideRoute(const RegisterScreen(), settings);
@@ -42,7 +44,8 @@ class AppRoutes {
         return _fadeSlideRoute(PlaylistsScreen(), settings);
       case summaries:
         return _fadeSlideRoute(const SummariesScreen(), settings);
-
+      case profile:
+        return _fadeSlideRoute(ProfileScreen(), settings);
       case plylitPlayer:
         return _fadeSlideRoute(
             const PlayerVideosScreen(
