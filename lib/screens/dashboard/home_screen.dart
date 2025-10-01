@@ -26,6 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final token = await TokenStorage.getToken();
     if (token != null) {
       context.read<ProfileCubit>().fetchProfile(token);
+      // print("$token");
     }
   }
 

@@ -15,3 +15,16 @@ class ProfileError extends ProfileState {
   final String message;
   ProfileError(this.message);
 }
+
+// ✅ تحديث
+class UpdateProfileLoading extends ProfileState {}
+
+class UpdateProfileSuccess extends ProfileState {
+  final UserProfileModel user;
+  UpdateProfileSuccess(this.user);
+}
+
+class UpdateProfileError extends ProfileState {
+  final String message;
+  UpdateProfileError(this.message);
+}

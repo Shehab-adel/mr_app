@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mister_app/cubit/auth/register/register_cubit.dart';
 
 void showUpdateDialog(
   BuildContext context,
-  String currentName,
-  String currentEmail,
-  String currentSubject,
-  String currentSemester,
-  Function(String, String, String, String) onSave,
-) {
-  final nameController = TextEditingController(text: currentName);
-  final emailController = TextEditingController(text: currentEmail);
-  final subjectController = TextEditingController(text: currentSubject);
-  final semesterController = TextEditingController(text: currentSemester);
-
+  TextEditingController nameController,
+  TextEditingController emailController,
+  TextEditingController subjectController,
+  TextEditingController semesterController, {
+  void Function()? onPressed,
+}) {
   showDialog(
     context: context,
     builder: (context) => AlertDialog(
@@ -26,33 +22,44 @@ void showUpdateDialog(
           children: [
             _buildTextField(nameController, "Name", Icons.person),
             _buildTextField(emailController, "Email", Icons.email),
-            _buildTextField(subjectController, "Subject", Icons.book),
-            _buildTextField(semesterController, "Semester", Icons.school),
+            buildSemesterDropdown(context, semesterController)
           ],
         ),
       ),
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context),
+          style: TextButton.styleFrom(
+            foregroundColor: Colors.grey[700],
+            textStyle: TextStyle(
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
           child: const Text("Cancel"),
         ),
+        SizedBox(width: 12.w),
         ElevatedButton(
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.blue,
+            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.r),
+              borderRadius: BorderRadius.circular(12.r),
             ),
+            elevation: 2,
           ),
           onPressed: () {
-            onSave(
-              nameController.text,
-              emailController.text,
-              subjectController.text,
-              semesterController.text,
-            );
-            Navigator.pop(context);
+            FocusScope.of(context).unfocus(); // يعمل sync قبل الحفظ
+            onPressed?.call();
           },
-          child: const Text("Save"),
+          child: Text(
+            "Save",
+            style: TextStyle(
+              fontSize: 14.sp,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ),
         ),
       ],
     ),
@@ -63,7 +70,7 @@ Widget _buildTextField(
     TextEditingController controller, String hint, IconData icon) {
   return Padding(
     padding: EdgeInsets.only(bottom: 12.h),
-    child: TextField(
+    child: TextFormField(
       controller: controller,
       decoration: InputDecoration(
         prefixIcon: Icon(icon, color: Colors.blue),
@@ -71,6 +78,32 @@ Widget _buildTextField(
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12.r),
         ),
+      ),
+    ),
+  );
+}
+
+/// 🔽 خاص بالـ Semester Dropdown
+Widget buildSemesterDropdown(
+    BuildContext context, TextEditingController semesterController) {
+  return DropdownButtonFormField<String>(
+    initialValue:
+        semesterController.text.isNotEmpty ? semesterController.text : null,
+    items: const [
+      DropdownMenuItem(value: "الأول", child: Text("الأول")),
+      DropdownMenuItem(value: "الثاني", child: Text("الثاني")),
+      DropdownMenuItem(value: "الثالث", child: Text("الثالث")),
+    ],
+    onChanged: (value) {
+      if (value != null) {
+        RegisterCubit.get(context).updateStudyInfo(value);
+      }
+    },
+    decoration: InputDecoration(
+      prefixIcon: const Icon(Icons.school, color: Colors.blue),
+      labelText: "Semester",
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12),
       ),
     ),
   );

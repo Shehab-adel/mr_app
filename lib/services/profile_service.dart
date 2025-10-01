@@ -1,12 +1,14 @@
 import 'package:dio/dio.dart';
 import 'package:mister_app/models/user_profile_model.dart';
 import 'package:mister_app/utils/app_strings.dart';
+import 'package:mister_app/utils/token_storage.dart';
 
 class ProfileService {
   final Dio _dio = Dio(BaseOptions(baseUrl: AppStrings.baseUrl));
 
-  Future<UserProfileModel> getProfile(String token) async {
+  Future<UserProfileModel> getProfile() async {
     try {
+      final token = await TokenStorage.getToken();
       final response = await _dio.get(
         "/users/me",
         options: Options(
@@ -38,5 +40,38 @@ class ProfileService {
       }
     }
     return errorMessage;
+  }
+
+  Future<UserProfileModel> updateProfile({
+    required String name,
+    required String email,
+    required String subject,
+    required String semester,
+  }) async {
+    try {
+      final token = await TokenStorage.getToken();
+      final response = await _dio.put(
+        "/users/profile",
+        options: Options(
+          headers: {"Authorization": "Bearer $token"},
+        ),
+        data: {
+          "name": name,
+          "email": email,
+          "subject": subject,
+          "semester": semester,
+        },
+      );
+
+      if (response.data["success"] == true && response.data["user"] != null) {
+        return UserProfileModel.fromJson(response.data["user"]);
+      } else {
+        throw Exception("فشل في تحديث البيانات");
+      }
+    } on DioException catch (e) {
+      throw Exception(_handleDioError(e));
+    } catch (e) {
+      throw Exception("حدث خطأ غير متوقع: $e");
+    }
   }
 }

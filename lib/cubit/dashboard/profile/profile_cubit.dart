@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mister_app/cubit/dashboard/profile/profile_state.dart';
 import 'package:mister_app/models/user_profile_model.dart';
@@ -8,14 +9,61 @@ class ProfileCubit extends Cubit<ProfileState> {
 
   ProfileCubit(this._profileService) : super(ProfileInitial());
   static ProfileCubit get(context) => BlocProvider.of(context);
-
+  final nameController = TextEditingController();
+  final emailController = TextEditingController();
+  final subjectController = TextEditingController();
+  final semesterController = TextEditingController();
+  late UserProfileModel user;
   Future<void> fetchProfile(String token) async {
     emit(ProfileLoading());
     try {
-      final UserProfileModel user = await _profileService.getProfile(token);
-      emit(ProfileSuccess(user));
+      user = await _profileService.getProfile();
+      nameController.text = user.name;
+      emailController.text = user.email;
+      subjectController.text = user.subject;
+      semesterController.text = user.semester;
+      emit(ProfileSuccess(UserProfileModel(
+          name: nameController.text,
+          email: emailController.text,
+          semester: semesterController.text,
+          subject: subjectController.text)));
     } catch (e) {
       emit(ProfileError(e.toString()));
     }
+  }
+
+  Future<void> updateProfile({
+    required String name,
+    required String email,
+    required String subject,
+    required String semester,
+  }) async {
+    emit(UpdateProfileLoading());
+
+    try {
+      UserProfileModel updatedUser = await _profileService.updateProfile(
+        name: name,
+        email: email,
+        subject: subject,
+        semester: semester,
+      );
+      nameController.text = updatedUser.name;
+      emailController.text = updatedUser.email;
+      subjectController.text = updatedUser.subject;
+      semesterController.text = updatedUser.semester;
+      emit(UpdateProfileSuccess(updatedUser));
+    } catch (e) {
+      emit(UpdateProfileError(e.toString()));
+      emit(ProfileSuccess(user));
+    }
+  }
+
+  @override
+  Future<void> close() {
+    nameController.dispose();
+    emailController.dispose();
+    subjectController.dispose();
+    semesterController.dispose();
+    return super.close();
   }
 }

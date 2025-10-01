@@ -1,19 +1,19 @@
 class UserProfileModel {
-  final String id;
+  final String? id;
   final String name;
   final String email;
-  final String role;
+  final String? role;
   final String semester;
-  final String stage;
+  final String? stage;
   final String subject;
 
   UserProfileModel({
-    required this.id,
+    this.id,
     required this.name,
     required this.email,
-    required this.role,
+    this.role,
     required this.semester,
-    required this.stage,
+    this.stage,
     required this.subject,
   });
 
