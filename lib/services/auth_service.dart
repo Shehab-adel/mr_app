@@ -40,6 +40,7 @@ class AuthService {
           "password": password,
         },
       );
+
       return UserAuthModel.fromJson(response.data);
     } on DioException catch (e) {
       throw Exception(_handleDioError(e));

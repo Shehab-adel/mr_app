@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mister_app/cubit/auth/signin/signin_cubit.dart';
 import 'package:mister_app/cubit/dashboard/profile/profile_state.dart';
 import 'package:mister_app/models/user_profile_model.dart';
 import 'package:mister_app/services/profile_service.dart';
@@ -62,6 +63,9 @@ class ProfileCubit extends Cubit<ProfileState> {
 
   Future<void> logout(BuildContext context) async {
     await TokenStorage.clearToken();
+    emailController.clear();
+    SigninCubit.get(context).emailController.clear();
+    SigninCubit.get(context).passwordController.clear();
     Navigator.pushNamedAndRemoveUntil(
         context, AppRoutes.signin, (route) => false);
   }
@@ -72,6 +76,7 @@ class ProfileCubit extends Cubit<ProfileState> {
     emailController.dispose();
     subjectController.dispose();
     semesterController.dispose();
+
     return super.close();
   }
 }

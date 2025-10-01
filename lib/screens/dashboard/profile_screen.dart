@@ -164,7 +164,44 @@ class ProfileScreen extends StatelessWidget {
                         },
                       );
                     },
-                    onLogout: () => cubit.logout(context),
+                    onLogout: () async {
+                      final confirm = await showDialog<bool>(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          title: const Text("Confirmation"),
+                          content:
+                              const Text("Are you sure you want to log out?"),
+                          actions: [
+                            TextButton(
+                              onPressed: () =>
+                                  Navigator.pop(context, false), // Cancel
+                              child: const Text(
+                                "Cancel",
+                                style: TextStyle(color: Colors.grey),
+                              ),
+                            ),
+                            TextButton(
+                              onPressed: () =>
+                                  Navigator.pop(context, true), // Confirm
+                              child: const Text(
+                                "Log out",
+                                style: TextStyle(
+                                  color: Colors.red,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+
+                      if (confirm == true) {
+                        cubit.logout(context); // call logout from cubit
+                      }
+                    },
                   ),
                 ],
               ),
