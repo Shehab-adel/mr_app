@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mister_app/cubit/dashboard/profile/profile_state.dart';
 import 'package:mister_app/models/user_profile_model.dart';
 import 'package:mister_app/services/profile_service.dart';
+import 'package:mister_app/utils/app_routes.dart';
+import 'package:mister_app/utils/token_storage.dart';
 
 class ProfileCubit extends Cubit<ProfileState> {
   final ProfileService _profileService;
@@ -56,6 +58,12 @@ class ProfileCubit extends Cubit<ProfileState> {
       emit(UpdateProfileError(e.toString()));
       emit(ProfileSuccess(user));
     }
+  }
+
+  Future<void> logout(BuildContext context) async {
+    await TokenStorage.clearToken();
+    Navigator.pushNamedAndRemoveUntil(
+        context, AppRoutes.signin, (route) => false);
   }
 
   @override

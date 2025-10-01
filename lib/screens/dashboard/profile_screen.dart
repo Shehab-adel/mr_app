@@ -164,7 +164,7 @@ class ProfileScreen extends StatelessWidget {
                         },
                       );
                     },
-                    onLogout: () => Navigator.pop(context),
+                    onLogout: () => cubit.logout(context),
                   ),
                 ],
               ),
