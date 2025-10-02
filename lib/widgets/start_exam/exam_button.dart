@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mister_app/utils/app_routes.dart';
 
 class ExamButton extends StatelessWidget {
   const ExamButton({super.key});
@@ -19,7 +20,7 @@ class ExamButton extends StatelessWidget {
             ),
           ),
           onPressed: () {
-            // TODO: Add your exam start logic here
+            Navigator.pushReplacementNamed(context, AppRoutes.exam);
           },
           child: Text(
             "START EXAM",

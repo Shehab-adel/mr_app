@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mister_app/widgets/forget_password/forget_form.dart';
 
-import '../widgets/forget_password/forget_button.dart';
-import '../widgets/forget_password/forget_footer.dart';
-import '../widgets/forget_password/forget_header.dart';
+import '../../widgets/forget_password/forget_button.dart';
+import '../../widgets/forget_password/forget_footer.dart';
+import '../../widgets/forget_password/forget_header.dart';
 
 class ForgetScreen extends StatelessWidget {
   const ForgetScreen({super.key});

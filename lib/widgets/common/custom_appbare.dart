@@ -2,12 +2,18 @@ import 'package:flutter/material.dart';
 
 class CustomAppbare extends StatelessWidget implements PreferredSizeWidget {
   final String title;
-  const CustomAppbare({required this.title, super.key});
+  final List<Widget>? actions;
+  final bool? automaticallyImplyLeading;
+  const CustomAppbare(
+      {required this.title,
+      this.actions,
+      this.automaticallyImplyLeading,
+      super.key});
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      // automaticallyImplyLeading: false,
+      automaticallyImplyLeading: automaticallyImplyLeading ?? true,
       title: Text(
         title,
         style: const TextStyle(
@@ -24,6 +30,7 @@ class CustomAppbare extends StatelessWidget implements PreferredSizeWidget {
           bottom: Radius.circular(24),
         ),
       ),
+      actions: actions,
     );
   }
 

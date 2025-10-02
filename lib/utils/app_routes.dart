@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:mister_app/screens/SelectGradeScreen.dart';
+import 'package:mister_app/screens/auth/register_Screen.dart';
 import 'package:mister_app/screens/dashboard/chat_screen.dart';
-import 'package:mister_app/screens/forget_screen.dart';
+import 'package:mister_app/screens/auth/forget_screen.dart';
 import 'package:mister_app/screens/dashboard/home_screen.dart';
 import 'package:mister_app/screens/dashboard/profile_screen.dart';
-import 'package:mister_app/screens/signin_screen.dart';
+import 'package:mister_app/screens/auth/signin_screen.dart';
+import 'package:mister_app/screens/exam/exam_screen.dart';
 import 'package:mister_app/screens/payment_screen.dart';
-import 'package:mister_app/screens/register_screen.dart';
 import 'package:mister_app/screens/splash_screen.dart';
-import 'package:mister_app/screens/start_exam_screen.dart';
+import 'package:mister_app/screens/exam/start_exam_screen.dart';
 import 'package:mister_app/screens/summeries/summaries_screen.dart';
 import 'package:mister_app/screens/videos/player_videos_screen.dart';
 import 'package:mister_app/screens/videos/playlists_screen.dart';
@@ -27,6 +28,7 @@ class AppRoutes {
   static const String profile = '/profile';
   static const String chat = "/chat";
   static const String startExam = "/startExam";
+  static const String exam = "/exam";
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -54,6 +56,8 @@ class AppRoutes {
         return _fadeSlideRoute(const ChatScreen(), settings);
       case startExam:
         return _fadeSlideRoute(const StartExamScreen(), settings);
+      case exam:
+        return _fadeSlideRoute(const ExamScreen(), settings);
       case plylitPlayer:
         return _fadeSlideRoute(
             const PlayerVideosScreen(
