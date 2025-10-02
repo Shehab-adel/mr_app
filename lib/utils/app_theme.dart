@@ -53,5 +53,6 @@ class AppTheme {
         borderRadius: BorderRadius.circular(12),
       ),
     ),
+    scaffoldBackgroundColor: Colors.grey.shade50,
   );
 }

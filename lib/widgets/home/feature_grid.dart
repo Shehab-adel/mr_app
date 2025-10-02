@@ -44,7 +44,7 @@ class FeatureGrid extends StatelessWidget {
           ),
           FeatureCard(
             onTap: () {
-              // Navigator.pushNamed(context, AppRoutes.exams);
+              Navigator.pushNamed(context, AppRoutes.startExam);
             },
             icon: Icons.grade,
             title: "Exams",
