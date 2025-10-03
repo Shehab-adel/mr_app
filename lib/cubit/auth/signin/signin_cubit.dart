@@ -25,6 +25,7 @@ class SigninCubit extends Cubit<SigninState> {
           password: passwordController.text.trim(),
         );
         await TokenStorage.saveToken(user.token);
+        // UserAuthModel.fromJson( user.toJson());
         emit(SigninSuccess(user));
       } catch (e) {
         emit(SigninError(

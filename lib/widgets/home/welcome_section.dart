@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mister_app/cubit/auth/signin/signin_cubit.dart';
+import 'package:mister_app/cubit/auth/signin/signin_state.dart';
 
 class WelcomeSection extends StatelessWidget {
   const WelcomeSection({super.key});
@@ -15,12 +18,23 @@ class WelcomeSection extends StatelessWidget {
             backgroundImage: const AssetImage("assets/images/avatar.png"),
           ),
           SizedBox(width: 12.w),
-          Text(
-            "Welcome, Mr. Ahmed",
-            style: TextStyle(
-              fontSize: 18.sp,
-              fontWeight: FontWeight.bold,
-            ),
+
+          /// نستخدم BlocBuilder عشان نجيب بيانات المستخدم
+          BlocBuilder<SigninCubit, SigninState>(
+            builder: (context, state) {
+              String name = "User"; // default
+              if (state is SigninSuccess) {
+                name = state.user.name; // ✅ من الـ state مش من cubit
+              }
+
+              return Text(
+                name,
+                style: TextStyle(
+                  fontSize: 18.sp,
+                  fontWeight: FontWeight.bold,
+                ),
+              );
+            },
           )
         ],
       ),

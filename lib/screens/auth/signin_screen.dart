@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mister_app/cubit/auth/signin/signin_cubit.dart';
 import 'package:mister_app/cubit/auth/signin/signin_state.dart';
 import 'package:mister_app/utils/app_routes.dart';
+import 'package:mister_app/utils/app_strings.dart';
 import 'package:mister_app/widgets/signin/signin_button.dart';
 import 'package:mister_app/widgets/signin/signin_footer.dart';
 import 'package:mister_app/widgets/signin/signin_form.dart';
@@ -70,44 +71,99 @@ class SigninScreen extends StatelessWidget {
                     }
 
                     if (state is SigninSuccess) {
-                      Navigator.pushReplacementNamed(
-                        context,
-                        AppRoutes.selectGrade,
-                      );
-                      showDialog(
-                        context: context,
-                        builder: (context) => AlertDialog(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16.r),
-                          ),
-                          backgroundColor: Colors.green.shade50,
-                          title: Row(
-                            children: [
-                              const Icon(Icons.check_circle,
-                                  color: Colors.green),
-                              SizedBox(width: 8.w),
-                              const Text("Welcome 🎉"),
+                      Navigator.pop(context); // ✅ يقفل Dialog الـ Loading
+
+                      if (state.user.email == AppStrings.adminEmail) {
+                        // 👈 ده الأدمن
+                        Navigator.pushReplacementNamed(
+                          context,
+                          AppRoutes.home,
+                        );
+
+                        // 🔹 رسالة مخصصة للأدمن
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16.r),
+                            ),
+                            backgroundColor: Colors.blue.shade50,
+                            title: Row(
+                              children: [
+                                const Icon(Icons.admin_panel_settings,
+                                    color: Colors.blue),
+                                SizedBox(width: 8.w),
+                                const Text(
+                                  "Welcome Admin 👑",
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
+                            content: const Text(
+                              "You are logged in as the system administrator.",
+                              style: TextStyle(fontSize: 16),
+                            ),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: const Text(
+                                  "OK",
+                                  style: TextStyle(
+                                      color: Colors.blue,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
                             ],
                           ),
-                          content: const Text(
-                            "Welcome back! We're happy to see you again.",
-                            style: TextStyle(fontSize: 16),
-                          ),
-                          actions: [
-                            TextButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              child: const Text(
-                                "OK",
-                                style: TextStyle(
-                                    color: Colors.green,
-                                    fontWeight: FontWeight.bold),
-                              ),
+                        );
+                      } else {
+                        // 👈 ده الطالب العادي
+                        Navigator.pushReplacementNamed(
+                          context,
+                          AppRoutes.selectGrade,
+                        );
+
+                        // 🔹 رسالة ترحيب للطالب
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16.r),
                             ),
-                          ],
-                        ),
-                      );
+                            backgroundColor: Colors.green.shade50,
+                            title: Row(
+                              children: [
+                                const Icon(Icons.check_circle,
+                                    color: Colors.green),
+                                SizedBox(width: 8.w),
+                                const Text(
+                                  "Welcome 🎉",
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
+                            content: const Text(
+                              "Welcome back! We're happy to see you again.",
+                              style: TextStyle(fontSize: 16),
+                            ),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: const Text(
+                                  "OK",
+                                  style: TextStyle(
+                                      color: Colors.green,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      }
                     } else if (state is SigninError) {
                       showDialog(
                         context: context,
